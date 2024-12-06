@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 
 // Enable CORS for multiple origins (for both GET and POST methods)
 const corsOptions = {
-  origin: ['http://localhost:5174', 'http://localhost:5173'], // List of allowed frontend origins
+  origin: ['http://localhost:5174', 'http://localhost:5173','https://show-omega.vercel.app/'], // List of allowed frontend origins
   methods: ['GET', 'POST'], // Allow both GET and POST methods
   credentials: true,
 };
