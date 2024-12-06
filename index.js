@@ -7,12 +7,21 @@ require('dotenv').config();
 const app = express();
 app.use(bodyParser.json());
 
-app.use(cors({
-  origin: 'http://localhost:5174',// Configure this based on your needs
-  methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+// app.use(cors({
+//   origin: 'http://localhost:5174',// Configure this based on your needs
+//   methods: ['GET', 'POST'],
+//   allowedHeaders: ['Content-Type', 'Authorization']
+// }));
 
+// Enable CORS for multiple origins (for both GET and POST methods)
+const corsOptions = {
+  origin: ['http://localhost:5174', 'http://localhost:5173'], // List of allowed frontend origins
+  methods: ['GET', 'POST'], // Allow both GET and POST methods
+  credentials: true,
+};
+
+// Use the CORS middleware
+app.use(cors(corsOptions));
 // MongoDB Connection
 const uri = process.env.DATABASE_URL; // Update with your MongoDB URI
 mongoose.connect(uri, )
