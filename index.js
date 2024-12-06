@@ -8,7 +8,7 @@ const app = express();
 app.use(bodyParser.json());
 
 app.use(cors({
-  origin: '*', // Configure this based on your needs
+  origin: 'http://localhost:5173',// Configure this based on your needs
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
@@ -22,7 +22,8 @@ mongoose.connect(uri, )
 // Define Mongoose Schema and Model
 const nameSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  uniqueid : {type: String, required : true}
+  uniqueid : {type: String, required : true},
+  imageurl : {type:String}
 });
 
 const NameModel = mongoose.model('Name', nameSchema);
@@ -36,8 +37,8 @@ app.get('/', (req, resp) => {
 // POST: Add a new name
 app.post('/addwish', async (req, res) => {
   try {
-    const {name, uniqueid} = req.body
-    const newName = new NameModel({ name, uniqueid });
+    const {name, uniqueid, imageurl} = req.body
+    const newName = new NameModel({ name, uniqueid,imageurl });
     const savedName = await newName.save();
     res.status(201).json(savedName);
   } catch (error) {
